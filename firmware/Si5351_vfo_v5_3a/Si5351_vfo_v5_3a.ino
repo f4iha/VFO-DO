@@ -1,4 +1,4 @@
-/*
+e/*
 
  Arduino Controlled GPS Corrected Dual Output Si5351A VFO
  
@@ -42,20 +42,20 @@
  D4  Rotary encoder pin B
  D5  2.5 MHz input from Si5351 CLK0 pin
  D6  Frequency resolution button
- D7  LCD RS 
- D8  LCD enable
- D9  LCD DB4
- D10 LCD DB5
- D11 LCD DB6
- D12 LCD DB7
+ D7  Disable GPS
+ D8  
+ D9  
+ D10 
+ D11
+ D12
  D13 
  A0/D14 Decrease frequency button
  A1/D15 Increase frequency button
  A2/D16 Offset enable
  A3/D17 Band Select button               
- A4/D18 Si5351 SDA
- A5/D19 Si5351 SCL 
- 
+ A4/D18 Si5351 SDA - I2C LCD SDA
+ A5/D19 Si5351 SCL - I2C LCD SCL
+  
  ----------------------------------------------------------------
  */
 
@@ -120,7 +120,7 @@ int CalFactor = 0;
 
 
 // include the library code:
-#include <LiquidCrystal.h>
+#include <LiquidCrystal_I2C.h>
 #include <string.h>
 #include <ctype.h>
 #include <avr/interrupt.h>  
@@ -132,16 +132,13 @@ int CalFactor = 0;
 #define encoderPinA              3 
 #define encoderPinB              4
 #define Resolution               6
-#define RS                       7 
-#define E                        8 
-#define DB4                      9
-#define DB5                     10 
-#define DB6                     11 
-#define DB7                     12
 #define FreqDown                A0
 #define FreqUp                  A1
 #define Offset                  A2
 #define BandSelect              A3
+
+// Set LCD I2C address
+#define LCD_addr              0x27
 
 // Set sI5351A I2C address
 #define Si5351A_addr          0x60 
@@ -159,8 +156,8 @@ int CalFactor = 0;
 #define PLL_RESET              177
 #define XTAL_LOAD_CAP          183
 
-// initialize the library with the numbers of the interface pins
-LiquidCrystal lcd(RS, E, DB4, DB5, DB6, DB7);
+// initialize the library with the size of the screen
+LiquidCrystal_I2C lcd(LCD_addr, 20, 4);
 
 // configure variables 
 byte fStepcount,offsetFlag=0,band;
@@ -261,7 +258,8 @@ void setup()
 
   Serial.begin(4800);                     // connect to the   port @ 4800 baud
 
-  lcd.display();                          // initialize LCD
+  lcd.init();                          // initialize LCD
+  lcd.backlight();
   lcd.setCursor(0,1);
   if (GPSflag == 1)
   {
