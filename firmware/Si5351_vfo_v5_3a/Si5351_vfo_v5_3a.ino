@@ -1,4 +1,4 @@
-e/*
+/*
 
  Arduino Controlled GPS Corrected Dual Output Si5351A VFO
  
@@ -132,6 +132,7 @@ int CalFactor = 0;
 #define encoderPinA              3 
 #define encoderPinB              4
 #define Resolution               6
+#define GPSDisable               7
 #define FreqDown                A0
 #define FreqUp                  A1
 #define Offset                  A2
@@ -207,6 +208,12 @@ ISR(TIMER1_OVF_vect)
 void setup()
 {
 
+  pinMode(GPSDisable, INPUT);
+  digitalWrite(GPSDisable, HIGH);           // internal pull-up enabled
+  // if GPSDisable pressed at startup, GPS is not used
+  if(digitalRead(GPSDisable) == LOW){
+    GPSflag = 0;
+  }
   Wire.begin(1);                  // join I2C bus (address = 1)
   si5351aStart();
 
