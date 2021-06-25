@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name vfo-do-rescue)(type Legacy)(uri ${KIPRJMOD}/vfo-do-rescue.lib)(options "")(descr ""))
+)
