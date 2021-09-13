@@ -763,4 +763,32 @@ Wire Wire Line
 Connection ~ 5100 3950
 Wire Wire Line
 	5800 750  6450 750 
+Wire Wire Line
+	9000 3850 9050 3850
+$Comp
+L vfo-do-rescue:CONN_01X02 P8
+U 1 1 613FBEC1
+P 9250 3800
+F 0 "P8" H 9500 3800 50  0000 C CNN
+F 1 "DIS GPS" V 9350 3800 50  0000 C CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 9250 3800 50  0001 C CNN
+F 3 "" H 9250 3800 50  0000 C CNN
+	1    9250 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L vfo-do-rescue:GND #PWR?
+U 1 1 613FBEC7
+P 9000 3850
+F 0 "#PWR?" H 9000 3600 50  0001 C CNN
+F 1 "GND" H 9000 3700 50  0000 C CNN
+F 2 "" H 9000 3850 50  0000 C CNN
+F 3 "" H 9000 3850 50  0000 C CNN
+	1    9000 3850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9050 3700 9050 3750
+Wire Wire Line
+	8000 3700 9050 3700
 $EndSCHEMATC
