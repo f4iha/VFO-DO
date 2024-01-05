@@ -40,8 +40,8 @@
  D2  GPS 1pps input 
  D3  Rotary encoder pin A
  D4  Rotary encoder pin B
- D5  2.5 MHz input from Si5351 CLK0 pin
- D6  Frequency resolution button
+ D5  Frequency resolution button
+ D6  2.5 MHz input from Si5351 CLK0 pin
  D7  Disable GPS
  D8  
  D9  
@@ -131,7 +131,7 @@ int CalFactor = 0;
 #define ppsPin                   2 
 #define encoderPinA              3 
 #define encoderPinB              4
-#define Resolution               6
+#define Resolution               5
 #define GPSDisable               7
 #define FreqDown                A0
 #define FreqUp                  A1
